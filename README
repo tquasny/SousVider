@@ -1,0 +1,11 @@
+SousVider
+by Todd Quasny
+
+Sous Vide cooking using a Raspberry Pi
+
+
+Modules/Libraries/Etc required:
+
+- BCM2835 Perl Module
+- Apache2 with PHP
+- RRD Tool
