@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sous Vides - Start Here</title>
+<meta name="viewport" content="width=device-width, height=device-height">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
+</script>
+
+
+
+<script>
+$(document).ready(function(){
+
+    $("#advanced").hide();
+
+    $("#btnAdvanced").click(function() {
+       $("#advanced").toggle();
+    });
+
+  
+});
+
+</script>
+
+
+</head>
+
+<body>
+
+<h1>Sous Vider</h1>
+<form action="cooker.php" method="post">
+  <select name="preTemp">
+    <option value=140>Chicken Breast (140)</option>
+    <option value=122>Steak - Blue (122)</option>
+    <option value=130>Steak - Rare (130)</option>
+    <option value=132>Steak - Medium Rare(132)</option>
+    <option value=135>Steak - Medium (135)</option>
+    <option value=137>Steak - Medium Well (137)</option>
+    <option value=140>Steak - Well (140)</option>
+    <option value=132.8>Hamburgers (132.8)</option>
+    <option value=132>Lamb Loin or Chops (132)</option>
+    <option value=147.5>Turkey Breast (147.5)</option>
+    <option value=185>Vegetables (185)</option>
+  </select>
+
+<br><br>
+<input type="submit" value="Start Cooking"></input>
+
+<br><br>
+
+<button id="btnAdvanced">Advanced Settings</button>
+
+<div id="advanced">
+
+Temperature Setpoint: <input type="text" name="usrTemp"><br>
+
+<h4>Controller Tuning</h4>
+P Bias: <input type="number" name="p" min="0" max="10" step="0.1" value="8"><br>
+I Bias: <input type="number" name="i" min="0" max="10" step="0.1" value="2"><br>
+
+
+</div>
+
+</form>
+</body>
+
+</html>

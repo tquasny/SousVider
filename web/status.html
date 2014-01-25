@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sous Vider- Status</title>
+<meta name="viewport" content="width=device-width, height=device-height">
+<script src="/jquery.js">
+</script>
+
+
+
+<script>
+$(document).ready(
+    function(){
+
+       getData();
+       getGraph();
+       setInterval(function() {getData()},5000);
+       setInterval(function() {getGraph()},30000);
+
+});
+
+function getData() {
+
+   $('#content').load('status_data.php');
+
+}
+
+function getGraph() {
+
+   $('#graph').load('status_graph.php');
+
+}
+
+
+</script>
+
+
+</head>
+
+<body>
+
+<div id="content">Loading...</div>
+<div id="graph"></div>
+</body>
+
+</html>
