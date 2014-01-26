@@ -6,6 +6,9 @@ all:
 	sudo chmod 775 /var/www
 	sudo cp misc/group /etc/group
 
+setup:
+	sudo cpan -i Device::BCM2835
+
 clean:
 	rm -rf /home/pi/cooker
 	sudo rm -f /var/www/*
