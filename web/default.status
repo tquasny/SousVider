@@ -1,0 +1,1 @@
+{ "title" : "Configured from the Web" , "temp" : 127.96 , "setpoint" : 140 , "state" : "DONE" , "power" : "OFF" , "error" : 12.04 , "start_time" : 1403471685 , "rrd_file" : "/home/pi/cooker/cooker.rrd" }

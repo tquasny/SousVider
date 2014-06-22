@@ -10,6 +10,8 @@ all:
 	sudo cp misc/sudoers /etc/sudoers
 	sudo chown root:root /etc/sudoers
 	sudo chmod 440 /etc/sudoers
+	sudo cp misc/rc.local /etc/rc.local
+	sudo chown root:root /etc/rc.local
 
 setup:
 	sudo cpan -i Device::BCM2835
