@@ -17,7 +17,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-cp /var/www/default.config /var/www/cooker.conig
+cp /var/www/default.config /var/www/cooker.config
 cp /var/www/default.status /var/www/cooker.status
 
 exit 0
