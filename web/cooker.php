@@ -10,7 +10,7 @@ else
 }
 
 
-$title = "Configured from the Web";
+$title = "SousVider Status";
 $p = 8;
 $i = 2;
 $ramp = 3;

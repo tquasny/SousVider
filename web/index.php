@@ -10,7 +10,7 @@ if($state == "WARMUP" || $state == "CONTROL" || $state == "COOLDOWN")
 }
 else
 {
-	header('Location: start.html');
+	header('Location: start.php');
 }
 
 ?>

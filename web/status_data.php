@@ -15,6 +15,8 @@ $str .= "The setpoint is " . $data["setpoint"] . " &deg;F<br>";
 $str .= "The cooker state is " . $data["state"] . "<br>";
 $str .= "The heater is currently " . $data["power"] . "<br>";
 $str .= "Current error is " . $data["error"] . "&deg;F<br>";
+$str .= "Current rate is " . $data["rate"] . "&deg;F / second<br>";
+$str .= "Current time until target is " . $data["time_to_target"] . " minutes<br>";
 
 if($state == "WARMUP" || $state == "CONTROL" || $state == "COOLDOWN")
 {

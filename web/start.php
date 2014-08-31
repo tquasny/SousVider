@@ -3,26 +3,6 @@
 <head>
 <title>Sous Vides - Start Here</title>
 <meta name="viewport" content="width=device-width, height=device-height">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
-</script>
-
-
-
-<script>
-$(document).ready(function(){
-
-    $("#advanced").hide();
-
-    $("#btnAdvanced").click(function() {
-       $("#advanced").toggle();
-    });
-
-  
-});
-
-</script>
-
-
 </head>
 
 <body>
@@ -42,6 +22,14 @@ $(document).ready(function(){
     <option value=132>Lamb Loin or Chops (132)</option>
     <option value=147.5>Turkey Breast (147.5)</option>
     <option value=185>Vegetables (185)</option>
+
+    <?php
+
+       for($i=100;$i<221;$i++)
+          echo "<option value=" . $i . ">Temp: " . $i . "</option>\n";
+
+    ?>
+
   </select>
 
 <br><br>
@@ -49,18 +37,6 @@ $(document).ready(function(){
 
 <br><br>
 
-<button id="btnAdvanced">Advanced Settings</button>
-
-<div id="advanced">
-
-Temperature Setpoint: <input type="text" name="usrTemp"><br>
-
-<h4>Controller Tuning</h4>
-P Bias: <input type="number" name="p" min="0" max="10" step="0.1" value="8"><br>
-I Bias: <input type="number" name="i" min="0" max="10" step="0.1" value="2"><br>
-
-
-</div>
 
 </form>
 </body>

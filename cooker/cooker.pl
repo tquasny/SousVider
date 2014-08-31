@@ -14,6 +14,7 @@ sub create_rrd;
 sub check_config;
 sub catch_sigint;
 sub write_status;
+sub set_rate;
 
 my %CONFIG;
 my $status_filename = "/var/www/cooker.status";
@@ -57,6 +58,10 @@ my $pwr_state;
 my $cooker_state = "WARMUP";
 my $cooker_start_time = time;
 my $x;
+my $previous_temp = 0;
+my $previous_time = 0;
+my $rate = 0;
+my $rate_number = 0;
 
 create_rrd();
 
@@ -124,8 +129,6 @@ while(1)
     if($cooker_state eq "CONTROL")
     {
 
-#	$t = get_temperature();
-  
 	$error = $target - $t;
 	$interror = $interror + $error;
 	$power = (($prop * $error) + (($integral * $interror)/100))/100;
@@ -212,6 +215,7 @@ sub get_temperature
     }
 
     $output = `rrdtool update $rrd_file N:$tempF`;
+    set_rate($tempF);
     write_status($tempF);
 
     #return the milli-celsius temp
@@ -324,6 +328,7 @@ sub write_status
     my $sp = $target / 1000.0;
     my $str = "";
     my $error;
+    my $time_to_target;
 
     if($tmp ne "N/A")
     {
@@ -333,12 +338,53 @@ sub write_status
 
     $error = $sp - $tmp;
 
+    $error = sprintf("%.2f",$error);
+
+    #Calculate the number of seconds to reach target
+    if($rate == 0)
+    {
+	$time_to_target = 999999;
+    }
+    else
+    {
+	$time_to_target = $error / $rate;
+    }
+
+    #Convert to number of minutes and format
+    $time_to_target = sprintf("%.6f",$time_to_target / 60.0);
+
+    $rate = sprintf("%.4f",$rate);
+
     $str .= "{ \"title\" : \"$title\" , \"temp\" : $tmp , \"setpoint\" : $sp , ";
     $str .= "\"state\" : \"$cooker_state\" , \"power\" : \"$pwr_state\" , \"error\" : $error , ";
-    $str .= "\"start_time\" : $cooker_start_time , \"rrd_file\" : \"$rrd_file\" }";
+    $str .= "\"start_time\" : $cooker_start_time , \"rrd_file\" : \"$rrd_file\" , ";
+    $str .= "\"rate\" : $rate , \"time_to_target\" : $time_to_target }";
 
     open(OUTF, ">$status_filename");
     print OUTF "$str\n";
     close(OUTF);
+
+}
+
+sub set_rate
+{
+    my $current_temp = $_[0];
+    my $current_time = time;
+    my $temp_delta = $current_temp - $previous_temp;
+    my $time_delta = $current_time - $previous_time;
+
+    #Get the rate in degrees per second
+    if($time_delta != 0 && $rate_number == 10)
+    {
+	$rate = $temp_delta / $time_delta;
+	$rate_number = 0;
+    }
+    else
+    {
+	$rate_number++;
+    }
+
+    $previous_temp = $current_temp;
+    $previous_time = $current_time;
 
 }
